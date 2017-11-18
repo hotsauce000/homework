@@ -25,11 +25,11 @@ public class Operation {
 	 */
 	public boolean eval(State s) {
 		if(guard.eval(s) == true){
-			System.out.println("OPture");
+
 			return true;
 
 		}else{
-			System.out.println("OPfalse");
+
 			return false;
 		}
 	}
@@ -47,9 +47,11 @@ public class Operation {
 			for(int i = 0 ; i < actions.size() ; i ++){
 
 				state = actions.get(i).next(state);
+				System.out.println("进入op循环");
 			}
 		}else{
-			System.out.println("异常了");
+
+			System.out.println(name);
 			throw new IllegalStateException();
 		}
 

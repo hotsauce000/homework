@@ -50,10 +50,10 @@ public class State {
 //	    从map里面取
         Object getVar = state.get(var);
         if(getVar != null){
-            System.out.println("GETture");
+
             return getVar;
         }else{
-            System.out.println("GETfalse");
+
             throw new java.util.NoSuchElementException();
         }
 

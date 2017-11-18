@@ -10,7 +10,10 @@ import ssy066.part1.*;
  * Created by kristofer on 21/11/14.
  */
 public class GraphFactory {
-
+    public static Graph graph ;
+    public GraphFactory(Graph graph){
+        this.graph = graph;
+    }
     /**
      * Given a set of operations and a state, return the operations that are enabled, i.e. their condition evaluate true
      *在makeMeAGraph（）里面要用
@@ -26,7 +29,7 @@ public class GraphFactory {
             if(o.eval(s)){
                 set.add(o);
             }else {
-                System.out.println("asfsdf");
+                System.out.println("错误");
             }
         }
         return set;
@@ -43,7 +46,20 @@ public class GraphFactory {
      * @return All outgoing transitions
      */
     public static HashSet<Transition> makeTransitions(Set<Operation> ops, State tail){
-        throw new NotImplementedException();
+            HashSet<Transition> set = new HashSet<Transition>();
+//            调用enabledOperations方法
+            Set<Operation> op = enabledOperations(ops , tail);
+//            遍历op
+            for(Operation o : op){
+                State s = o.execute(tail);
+                Transition t = new Transition(o.name , tail , s , 1);
+                set.add(t);
+            }
+            return set ;
+
+
+
+        //        throw new NotImplementedException();
     }
 
     /**
@@ -56,7 +72,10 @@ public class GraphFactory {
      * @return The graph
      */
 	public static Graph makeMeAGraph(Set<Operation> operations, State init){
-	    throw new NotImplementedException();
+                Graph graph = new implementGraph(operations , init) ;
+                return graph;
+
+	    //	    throw new NotImplementedException();
     }
 
 

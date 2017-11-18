@@ -34,10 +34,10 @@ public class EQ implements Predicate {
 	 */
 	public boolean eval(State s) {
 		if(s.get(v) == value){
-			System.out.println("EQture");
+
 			return true;
 		}else{
-			System.out.println("EQfalse");
+
 			return false;
 		}
 	}
