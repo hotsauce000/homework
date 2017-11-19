@@ -119,6 +119,7 @@ public class implementGraph implements Graph {
 
         HashSet<Transition> setIncomingTransitions = new HashSet<Transition>();
         HashSet<Transition> setAllTransitions = this.getTransitions();
+        System.out.println(operations.toString() + "");
 
         State sNew = s ;
         System.out.println(setAllTransitions.size() + "setAllTransitions的大小");
