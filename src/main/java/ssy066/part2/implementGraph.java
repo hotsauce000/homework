@@ -26,37 +26,59 @@ public class implementGraph implements Graph {
         State s = state ;
         Operation op = null;
         set.add(s);
-        while(operations != null){
+        while(operations.size() != 0 ){
             for(Operation o : operations) {
-                System.out.println(o.name + "剩下的O");
 
                 if(o.eval(s) == true){
-                    System.out.println(o.name + "真");
+
                     s = o.execute(s);
                     set.add(s);
                     op = o ;
                 }else{
-                    System.out.println(o.name + "假");
+
                 }
             }
             operations.remove(op);
-            System.out.println("被删除的是" + op.name);
+
         }
-
-
        return set;
     }
-
+    @Override
     public HashSet<Transition> getTransitions(){
-        throw new NotImplementedException();
+        HashSet<Transition> set = new HashSet<Transition>();
+        State sTail = state ;
+        State sHead = null ;
+        Operation op = null;
+        System.out.println(operations.size() + " o1o2 的大小");
+        while(operations.size() != 0){
+            for(Operation o : operations){
+                if(o.eval(sTail) == true){
+                    sHead = o.execute(sTail);
+                    Transition t = new Transition(o.name , sTail , sHead , 1);
+                    sTail = sHead ;
+                    op = o ;
+                    set.add(t) ;
+                }else{
+                    System.out.println("假" + o.name);
+                }
+            }
+            operations.remove(op);
+        }
+        return set ;
+
+
+        //        throw new NotImplementedException();
     };
 
     /**
      *
      * @return the initial state of this graph
      */
+    @Override
     public State getInitalState(){
-        throw new NotImplementedException();
+       return state ;
+
+//        throw new NotImplementedException();
     };
 
     /**
@@ -66,8 +88,21 @@ public class implementGraph implements Graph {
      * @param s The state
      * @return All outgoing transitions
      */
+    @Override
     public HashSet<Transition> getOutGoingTransitions(State s){
-        throw new NotImplementedException();
+        HashSet<Transition> set = new HashSet<Transition>();
+        State sNew = s ;
+        State head = null ;
+        for(Operation o : operations){
+            if(o.eval(sNew)){
+                head = o.execute(sNew);
+                Transition t = new Transition(o.name , sNew , head , 1);
+                set.add(t);
+            }
+        }
+        return set;
+
+        //        throw new NotImplementedException();
     };
 
     /**
@@ -77,8 +112,30 @@ public class implementGraph implements Graph {
      * @param s the state
      * @return a set including the incoming transitions
      */
+    @Override
     public HashSet<Transition> getIncomingTransitions(State s){
-        throw new NotImplementedException();
+        HashSet<Transition> setIncomingTransitions = new HashSet<Transition>();
+        HashSet<Transition> setAllTransitions = getTransitions();
+
+        State sNew = s ;
+        System.out.println(setAllTransitions.size() + "setAllTransitions的大小");
+        for(Transition t : setAllTransitions){
+
+//            注意要用equals 不是 ==
+            if(t.head.equals(sNew)){
+                setIncomingTransitions.add(t);
+            }
+        }
+        System.out.println(setIncomingTransitions.size());
+        if(setIncomingTransitions.size() != 0 ){
+            return setIncomingTransitions;
+        }else{
+            System.out.println(sNew.toString() + "没有IncomingTransitions的state getIncomingTransitions方法调用");
+            setIncomingTransitions.add(null);
+            return setIncomingTransitions;
+        }
+
+//        throw new NotImplementedException();
     };
 
 
@@ -89,8 +146,19 @@ public class implementGraph implements Graph {
      * @param s the state
      * @return all successor state
      */
+    @Override
     public HashSet<State> getSuccStates(State s){
-        throw new NotImplementedException();
+        HashSet<State> set = new HashSet<State>();
+
+        State SuccStates = null;
+        for(Operation o : operations){
+            if(o.eval(s)){
+                SuccStates = o.execute(s);
+                set.add(SuccStates);
+            }
+        }
+        return set ;
+//        throw new NotImplementedException();
     };
 
     /**
@@ -101,7 +169,16 @@ public class implementGraph implements Graph {
      * @return all predecessor state
      */
     public HashSet<State> getPredStates(State s){
-        throw new NotImplementedException();
+        HashSet<State> sPredStates = new HashSet<State>();
+        HashSet<Transition> setIncomingTransitions = getIncomingTransitions(s);
+
+        for (Transition t : setIncomingTransitions){
+            if(t.head.equals(s)){
+                sPredStates.add(t.tail);
+            }
+        }
+        return sPredStates;
+//        throw new NotImplementedException();
     };
 
     /**
@@ -109,7 +186,18 @@ public class implementGraph implements Graph {
      * @return A set of states
      */
     public HashSet<State> getSourceStates(){
-        throw new NotImplementedException();
+        HashSet<State> setState = getStates();
+//        System.out.println(setState.size() + "state的大小");
+        for(State s : setState){
+            System.out.println(s.toString() + "所有的state");
+            HashSet<Transition> set = getIncomingTransitions(s);
+            if(set.contains(null)){
+                System.out.println(getIncomingTransitions(s).toString() + "没有输入的Transitons");
+                setState.add(s);
+            }
+        }
+        return setState;
+//        throw new NotImplementedException();
     };
 
     /**
@@ -117,6 +205,7 @@ public class implementGraph implements Graph {
      * @return A set of states
      */
     public HashSet<State> getSinkStates(){
+
         throw new NotImplementedException();
     };
 

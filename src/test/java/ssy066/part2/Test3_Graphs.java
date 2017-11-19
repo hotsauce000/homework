@@ -231,7 +231,7 @@ public class Test3_Graphs extends TestCase {
         Set<Transition> result = g.getOutGoingTransitions((testState));
 
         Set<Transition> compare = new HashSet<Transition>();
-        compare.add(new Transition("o1", (testState), (testState.newState(v1, 1)), 1));
+        compare.add(new Transition("o1", (testState), (testState.newState(v1, 1 )), 1));
 
         assertTrue(result.equals(compare));
     }
@@ -245,7 +245,8 @@ public class Test3_Graphs extends TestCase {
         g = GraphFactory.makeMeAGraph(o1o2, testState);
 
         Set<Transition> result = g.getIncomingTransitions((testState.newState(v1, 1)));
-
+//        Set<Transition> result = g.getIncomingTransitions(testState);
+//        System.out.println(result.toString());
         Set<Transition> compare = new HashSet<Transition>();
         compare.add(new Transition("o1", (testState), (testState.newState(v1, 1)), 1));
 
@@ -259,7 +260,7 @@ public class Test3_Graphs extends TestCase {
     public void test8_graphGetSuccStates() {
         g = GraphFactory.makeMeAGraph(o1o2, testState);
 
-
+//        testState进行一次操作后可以获得的State
         Set<State> result = g.getSuccStates((testState));
 
         Set<State> compare = new HashSet<State>();
@@ -274,7 +275,7 @@ public class Test3_Graphs extends TestCase {
     public void test9_graphGetPredStates() {
         g = GraphFactory.makeMeAGraph(o1o2, testState);
 
-
+//        获得每个state之前一次操作的状态
         Set<State> result = g.getPredStates((testState.newState(v1, 1)));
 
         Set<State> compare = new HashSet<State>();

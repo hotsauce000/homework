@@ -47,7 +47,7 @@ public class Operation {
 			for(int i = 0 ; i < actions.size() ; i ++){
 
 				state = actions.get(i).next(state);
-				System.out.println("进入op循环");
+
 			}
 		}else{
 
