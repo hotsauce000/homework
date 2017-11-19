@@ -26,7 +26,10 @@ public class implementGraph implements Graph {
         State s = state ;
         Operation op = null;
         set.add(s);
+
+
         while(operations.size() != 0 ){
+            System.out.println(operations.size() + "ccadaffsdfsd ");
             for(Operation o : operations) {
 
                 if(o.eval(s) == true){
@@ -51,8 +54,9 @@ public class implementGraph implements Graph {
         State sHead = null ;
         Operation op = null;
 
-        System.out.println(operations.toString() + " o1o2 的大小");
+        System.out.println(operations.toString() + " getTransitions() ");
         while(operations.size() != 0){
+            System.out.println(operations.size() +  "aaaaaaaaaaaaaaa");
             for(Operation o : operations){
                 if(o.eval(sTail) == true){
                     sHead = o.execute(sTail);
@@ -119,7 +123,7 @@ public class implementGraph implements Graph {
 
         HashSet<Transition> setIncomingTransitions = new HashSet<Transition>();
         HashSet<Transition> setAllTransitions = this.getTransitions();
-        System.out.println(operations.toString() + "");
+        System.out.println(operations.toString() + "getIncomingTransitions(State s)");
 
         State sNew = s ;
         System.out.println(setAllTransitions.size() + "setAllTransitions的大小");
