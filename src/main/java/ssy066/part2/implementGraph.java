@@ -47,9 +47,11 @@ public class implementGraph implements Graph {
     public HashSet<Transition> getTransitions(){
         HashSet<Transition> set = new HashSet<Transition>();
         State sTail = state ;
+        System.out.println(state.toString() + " getTransitions() 里面的state");
         State sHead = null ;
         Operation op = null;
-        System.out.println(operations.size() + " o1o2 的大小");
+
+        System.out.println(operations.toString() + " o1o2 的大小");
         while(operations.size() != 0){
             for(Operation o : operations){
                 if(o.eval(sTail) == true){
@@ -114,8 +116,9 @@ public class implementGraph implements Graph {
      */
     @Override
     public HashSet<Transition> getIncomingTransitions(State s){
+
         HashSet<Transition> setIncomingTransitions = new HashSet<Transition>();
-        HashSet<Transition> setAllTransitions = getTransitions();
+        HashSet<Transition> setAllTransitions = this.getTransitions();
 
         State sNew = s ;
         System.out.println(setAllTransitions.size() + "setAllTransitions的大小");
@@ -186,11 +189,13 @@ public class implementGraph implements Graph {
      * @return A set of states
      */
     public HashSet<State> getSourceStates(){
+        System.out.println(operations.toString() + "getSourceStates() " );
         HashSet<State> setState = getStates();
+        HashSet<Transition> set ;
 //        System.out.println(setState.size() + "state的大小");
         for(State s : setState){
             System.out.println(s.toString() + "所有的state");
-            HashSet<Transition> set = getIncomingTransitions(s);
+            set = getIncomingTransitions(s);
             if(set.contains(null)){
                 System.out.println(getIncomingTransitions(s).toString() + "没有输入的Transitons");
                 setState.add(s);

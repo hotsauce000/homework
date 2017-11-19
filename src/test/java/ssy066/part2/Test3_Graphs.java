@@ -137,7 +137,8 @@ public class Test3_Graphs extends TestCase {
     public void test2_makeTransitions() {
         State init = testState;
         State instep2 = init.newState(v1, 1);
-
+//        Set<Transition> trans1 = GraphFactory.makeTransitions(o1o2 , init);
+//        System.out.println(trans1.size() + "sdfef");
         Set<Transition> trans1 = GraphFactory.makeTransitions(operations, init);
         Set<Transition> trans2 = GraphFactory.makeTransitions(operations, instep2);
 
@@ -291,7 +292,7 @@ public class Test3_Graphs extends TestCase {
      */
     public void test10_graphGetSourceStates() {
         g = GraphFactory.makeMeAGraph(o1o2, testState);
-
+        System.out.println(o1o2.toString() + " 源头");
         Set<State> result = g.getSourceStates();
 
         Set<State> compare = new HashSet<State>();
